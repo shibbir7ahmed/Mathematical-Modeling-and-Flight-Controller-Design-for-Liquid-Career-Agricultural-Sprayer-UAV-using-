@@ -1,0 +1,73 @@
+%implements s0_b0_t2ekm_Outputs "C"
+
+%function Outputs(block, system) Output
+%assign cfgTxt = ""
+%openfile cfgTxt
+%assign localVarDecl = ""
+%assign tlcOutputsFcnOfS0B0 = OpaqueTLCBlockFcn("Outputs", 0, 0, 0, 2)
+%assign tlcOutputsFcnOfS0B1 = OpaqueTLCBlockFcn("Outputs", 0, 1, 0, 2)
+%assign tlcOutputsFcnOfS0B2 = OpaqueTLCBlockFcn("Outputs", 0, 2, 0, 2)
+%assign tlcOutputsFcnOfS0B3 = OpaqueTLCBlockFcn("Outputs", 0, 3, 0, 2)
+%assign tlcOutputsFcnOfS0B4 = OpaqueTLCBlockFcn("Outputs", 0, 4, 0, 2)
+%assign tlcOutputsFcnOfS0B5 = OpaqueTLCBlockFcn("Outputs", 0, 5, 0, 2)
+%assign tlcOutputsFcnOfS0B6 = OpaqueTLCBlockFcn("Outputs", 0, 6, 0, 2)
+%assign tlcOutputsFcnOfS0B7 = OpaqueTLCBlockFcn("Outputs", 0, 7, 0, 2)
+/* Sin: '<Root>/Sine Wave' */
+ActuatorFaultSim_B.SineWave = sin(ActuatorFaultSim_P.SineWave_Freq * %<(SLibCG_SE(LibGetTaskTime(0)))> + ActuatorFaultSim_P.SineWave_Phase) * ActuatorFaultSim_P.SineWave_Amp + ActuatorFaultSim_P.SineWave_Bias;
+%<tlcOutputsFcnOfS0B0>\
+if (%<(SLibCGIRIsSampleHit(1, 0))>) {
+%<tlcOutputsFcnOfS0B1>\
+}
+%<tlcOutputsFcnOfS0B2>\
+if (%<(SLibCGIRIsSampleHit(1, 0))>) {
+%<tlcOutputsFcnOfS0B3>\
+}
+/* Sum: '<Root>/Sum' */
+ActuatorFaultSim_B.Sum[0] = ActuatorFaultSim_B.SFunction[0] - ActuatorFaultSim_B.REFSIGNALS[0];
+ActuatorFaultSim_B.Sum[1] = ActuatorFaultSim_B.SFunction[1] - ActuatorFaultSim_B.REFSIGNALS[1];
+ActuatorFaultSim_B.Sum[2] = ActuatorFaultSim_B.SFunction[2] - ActuatorFaultSim_B.REFSIGNALS[2];
+ActuatorFaultSim_B.Sum[3] = ActuatorFaultSim_B.SFunction[3] - ActuatorFaultSim_B.REFSIGNALS[3];
+if (%<(SLibCGIRIsSampleHit(1, 0))>) {
+%<tlcOutputsFcnOfS0B4>\
+}
+/* SignalConversion: '<Root>/TmpSignal ConversionAtSlidingSurfaceInport1' incorporates:
+ *  Integrator: '<Root>/Integrator'
+ */
+ActuatorFaultSim_B.TmpSignalConversionAtSlidingSur[0] = ActuatorFaultSim_B.Sum[0];
+ActuatorFaultSim_B.TmpSignalConversionAtSlidingSur[4] = ActuatorFaultSim_X.Integrator_CSTATE[0];
+ActuatorFaultSim_B.TmpSignalConversionAtSlidingSur[1] = ActuatorFaultSim_B.Sum[1];
+ActuatorFaultSim_B.TmpSignalConversionAtSlidingSur[5] = ActuatorFaultSim_X.Integrator_CSTATE[1];
+ActuatorFaultSim_B.TmpSignalConversionAtSlidingSur[2] = ActuatorFaultSim_B.Sum[2];
+ActuatorFaultSim_B.TmpSignalConversionAtSlidingSur[6] = ActuatorFaultSim_X.Integrator_CSTATE[2];
+ActuatorFaultSim_B.TmpSignalConversionAtSlidingSur[3] = ActuatorFaultSim_B.Sum[3];
+ActuatorFaultSim_B.TmpSignalConversionAtSlidingSur[7] = ActuatorFaultSim_X.Integrator_CSTATE[3];
+%<tlcOutputsFcnOfS0B5>\
+if (%<(SLibCGIRIsSampleHit(1, 0))>) {
+%<tlcOutputsFcnOfS0B6>\
+}
+/* SignalConversion: '<Root>/TmpSignal ConversionAtIntArgSlidingInport1' */
+ActuatorFaultSim_B.TmpSignalConversionAtIntArgSlid[0] = ActuatorFaultSim_B.SineWave;
+ActuatorFaultSim_B.TmpSignalConversionAtIntArgSlid[1] = ActuatorFaultSim_B.SineWave;
+ActuatorFaultSim_B.TmpSignalConversionAtIntArgSlid[2] = ActuatorFaultSim_B.Sum[0];
+ActuatorFaultSim_B.TmpSignalConversionAtIntArgSlid[6] = ActuatorFaultSim_B.SFunction[0];
+ActuatorFaultSim_B.TmpSignalConversionAtIntArgSlid[3] = ActuatorFaultSim_B.Sum[1];
+ActuatorFaultSim_B.TmpSignalConversionAtIntArgSlid[7] = ActuatorFaultSim_B.SFunction[1];
+ActuatorFaultSim_B.TmpSignalConversionAtIntArgSlid[4] = ActuatorFaultSim_B.Sum[2];
+ActuatorFaultSim_B.TmpSignalConversionAtIntArgSlid[8] = ActuatorFaultSim_B.SFunction[2];
+ActuatorFaultSim_B.TmpSignalConversionAtIntArgSlid[5] = ActuatorFaultSim_B.Sum[3];
+ActuatorFaultSim_B.TmpSignalConversionAtIntArgSlid[9] = ActuatorFaultSim_B.SFunction[3];
+%<tlcOutputsFcnOfS0B7>\
+/* SignalConversion: '<Root>/TmpSignal ConversionAtS-FunctionInport1' */
+ActuatorFaultSim_B.TmpSignalConversionAtSFunctionI[0] = ActuatorFaultSim_B.SineWave;
+ActuatorFaultSim_B.TmpSignalConversionAtSFunctionI[1] = ActuatorFaultSim_B.SineWave;
+%<SLibInsertSolverResetCode()>\
+%closefile cfgTxt
+%<cfgTxt>
+%assign fcnProtoType = ""
+%openfile fcnProtoType
+static void Outputs(\
+%assign comma = ""
+%closefile fcnProtoType
+%<SLibCG_SetFcnProtoType(0, 2, fcnProtoType)>
+%<LibSetSystemField(system, "CachedOutputLocalVars", localVarDecl)>
+%endfunction

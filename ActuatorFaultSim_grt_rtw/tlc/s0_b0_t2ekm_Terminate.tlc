@@ -1,0 +1,31 @@
+%implements s0_b0_t2ekm_Terminate "C"
+
+%function Terminate(block, system) Output
+%assign cfgTxt = ""
+%openfile cfgTxt
+%assign localVarDecl = ""
+%assign tlcTerminateFcnOfS0B0 = OpaqueTLCBlockFcn("Terminate", 0, 0, 0, 6)
+%assign tlcTerminateFcnOfS0B2 = OpaqueTLCBlockFcn("Terminate", 0, 2, 0, 6)
+%assign tlcTerminateFcnOfS0B5 = OpaqueTLCBlockFcn("Terminate", 0, 5, 0, 6)
+%assign tlcTerminateFcnOfS0B7 = OpaqueTLCBlockFcn("Terminate", 0, 7, 0, 6)
+%assign tlcCleanupRuntimeResourcesFcnOfS0B0 = OpaqueTLCBlockFcn("CleanupRuntimeResources", 0, 0, 0, 6)
+%assign tlcCleanupRuntimeResourcesFcnOfS0B2 = OpaqueTLCBlockFcn("CleanupRuntimeResources", 0, 2, 0, 6)
+%assign tlcCleanupRuntimeResourcesFcnOfS0B5 = OpaqueTLCBlockFcn("CleanupRuntimeResources", 0, 5, 0, 6)
+%assign tlcCleanupRuntimeResourcesFcnOfS0B7 = OpaqueTLCBlockFcn("CleanupRuntimeResources", 0, 7, 0, 6)
+%<tlcTerminateFcnOfS0B0>\
+%<tlcTerminateFcnOfS0B2>\
+%<tlcTerminateFcnOfS0B5>\
+%<tlcTerminateFcnOfS0B7>\
+%<tlcCleanupRuntimeResourcesFcnOfS0B0>\
+%<tlcCleanupRuntimeResourcesFcnOfS0B2>\
+%<tlcCleanupRuntimeResourcesFcnOfS0B5>\
+%<tlcCleanupRuntimeResourcesFcnOfS0B7>\
+%closefile cfgTxt
+%<cfgTxt>
+%assign fcnProtoType = ""
+%openfile fcnProtoType
+static void Terminate(\
+%assign comma = ""
+%closefile fcnProtoType
+%<SLibCG_SetFcnProtoType(0, 6, fcnProtoType)>
+%endfunction

@@ -1,0 +1,27 @@
+%implements s0_b0_t2ekm_Derivatives "C"
+
+%function Derivatives(block, system) Output
+%assign cfgTxt = ""
+%openfile cfgTxt
+%assign localVarDecl = ""
+%openfile localVarDecl
+XDot_ActuatorFaultSim_T *_rtXdot;
+%closefile localVarDecl
+%assign tlcDerivativesFcnOfS0B2 = OpaqueTLCBlockFcn("Derivatives", 0, 2, 0, 4)
+_rtXdot = %<(SLibCG_SE(SLibGetContStatesDerivativeStructPtr()))>;
+%<tlcDerivativesFcnOfS0B2>\
+/* Derivatives for Integrator: '<Root>/Integrator' */
+_rtXdot->Integrator_CSTATE[0] = ActuatorFaultSim_B.IntArgSliding[0];
+_rtXdot->Integrator_CSTATE[1] = ActuatorFaultSim_B.IntArgSliding[1];
+_rtXdot->Integrator_CSTATE[2] = ActuatorFaultSim_B.IntArgSliding[2];
+_rtXdot->Integrator_CSTATE[3] = ActuatorFaultSim_B.IntArgSliding[3];
+%closefile cfgTxt
+%<cfgTxt>
+%assign fcnProtoType = ""
+%openfile fcnProtoType
+static void Derivatives(\
+%assign comma = ""
+%closefile fcnProtoType
+%<SLibCG_SetFcnProtoType(0, 4, fcnProtoType)>
+%<LibSetSystemField(system, "CachedDerivativeLocalVars", localVarDecl)>
+%endfunction

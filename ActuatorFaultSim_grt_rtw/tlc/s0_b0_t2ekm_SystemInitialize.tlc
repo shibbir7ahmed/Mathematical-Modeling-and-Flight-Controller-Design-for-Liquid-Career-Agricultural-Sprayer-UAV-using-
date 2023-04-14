@@ -1,0 +1,31 @@
+%implements s0_b0_t2ekm_SystemInitialize "C"
+
+%function SystemInitialize(block, system) Output
+%assign cfgTxt = ""
+%openfile cfgTxt
+%assign localVarDecl = ""
+%assign tlcInitializeConditionsFcnOfS0B0 = OpaqueTLCBlockFcn("InitializeConditions", 0, 0, 0, 1)
+%assign tlcInitializeConditionsFcnOfS0B2 = OpaqueTLCBlockFcn("InitializeConditions", 0, 2, 0, 1)
+%assign tlcInitializeConditionsFcnOfS0B5 = OpaqueTLCBlockFcn("InitializeConditions", 0, 5, 0, 1)
+%assign tlcInitializeConditionsFcnOfS0B7 = OpaqueTLCBlockFcn("InitializeConditions", 0, 7, 0, 1)
+%<SLibInsertAsyncTaskInitializeCode(system)>
+%<SLibWriteMachineInitialize()>
+%<tlcInitializeConditionsFcnOfS0B0>\
+%<tlcInitializeConditionsFcnOfS0B2>\
+/* InitializeConditions for Integrator: '<Root>/Integrator' */
+ActuatorFaultSim_X.Integrator_CSTATE[0] = ActuatorFaultSim_P.Integrator_IC;
+ActuatorFaultSim_X.Integrator_CSTATE[1] = ActuatorFaultSim_P.Integrator_IC;
+ActuatorFaultSim_X.Integrator_CSTATE[2] = ActuatorFaultSim_P.Integrator_IC;
+ActuatorFaultSim_X.Integrator_CSTATE[3] = ActuatorFaultSim_P.Integrator_IC;
+%<tlcInitializeConditionsFcnOfS0B5>\
+%<tlcInitializeConditionsFcnOfS0B7>\
+%<SLibInsertInitPeriodicCStatesFcn(system)>
+%closefile cfgTxt
+%<cfgTxt>
+%assign fcnProtoType = ""
+%openfile fcnProtoType
+static void SystemInitialize(\
+%assign comma = ""
+%closefile fcnProtoType
+%<SLibCG_SetFcnProtoType(0, 1, fcnProtoType)>
+%endfunction
